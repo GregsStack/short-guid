@@ -114,6 +114,11 @@ namespace ShortGuid
         /// <returns>A new Guid</returns>
         public static Guid Decode(string value)
         {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return Guid.Empty;
+            }
+            
             value = value.Replace("_", "/").Replace("-", "+");
             var buffer = Convert.FromBase64String(value + "==");
             return new Guid(buffer);
